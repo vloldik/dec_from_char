@@ -1,6 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-use core::DecimalExtended;
+use dec_from_char::DecimalExtended;
 
 
 fn benchmark_decimal_extended_string(c: &mut Criterion) {
