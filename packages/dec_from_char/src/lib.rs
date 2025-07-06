@@ -1,6 +1,6 @@
 #![doc = include_str!("../../../Readme.md")]
 
-use generate::{self, digit_parse_mappings};
+use dec_from_char_gen::{digit_parse_mappings};
 
 pub trait DecimalExtended where Self: Sized + Copy {
     /// Converts any decimal unicode digit in `Nd` category
