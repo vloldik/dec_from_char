@@ -42,9 +42,6 @@ fn benchmark_decimal_extended_string(c: &mut Criterion) {
 fn benchmark_decimal_extended_char(c: &mut Criterion) {
     let mut group = c.benchmark_group("to_decimal_utf8_char");
 
-    let a = '0';
-    let l = &a;
-
     group.bench_function("ASCII digit with simple decimal", |b| {
         b.iter(|| black_box('7').to_digit(10))
     });
