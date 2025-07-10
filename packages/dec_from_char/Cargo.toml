@@ -7,7 +7,7 @@ description = "Small library for converting unicode decimal into numbers"
 authors = ["vloldik (@vloldik)"]
 keywords = ["text", "unicode", "decimal"]
 categories = ["text-processing"]
-readme = "../../Readme.md"
+readme = "Readme.md"
 repository = "https://github.com/vloldik/dec_from_char"
 documentation = "https://docs.rs/dec_from_char"
 

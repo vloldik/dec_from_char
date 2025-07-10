@@ -1,4 +1,4 @@
-#[doc=include_str!("../../../Readme.md")]
+#[doc=include_str!("../Readme.md")]
 
 use dec_from_char_gen::{digit_parse_mappings};
 
