@@ -26,12 +26,16 @@ impl DecimalExtended for char {
     }
 }
 
+/// Returns string containing only normalized decimals from '0' to '9'
+/// If char is not decimal it will be removed
 pub fn normalize_decimals_filtering(s: &str) -> String {
     s.chars()
         .filter_map(| c | c.normalize_decimal())
         .collect()
 }
 
+/// Returns string containing normalized decimals.
+/// If char did not match 'Nd' it keeps same
 pub fn normalize_decimals(s: &str) -> String {
     s.chars()
         .map(| c | c.normalize_decimal().unwrap_or(c))
@@ -96,7 +100,8 @@ mod tests {
             println!("line {}: {}", line_number, line);
             let expected_result = "0023434098324892398099";
             assert_eq!(parsed.as_str(), expected_result);
-            assert_eq!(normalize_decimals(line), expected_result)
+            assert_eq!(normalize_decimals_filtering(line), expected_result);
+            println!("{}", normalize_decimals(line))
         });
 
     }
