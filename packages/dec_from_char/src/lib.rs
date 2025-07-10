@@ -3,18 +3,39 @@ use dec_from_char_gen::{digit_parse_mappings};
 
 pub trait DecimalExtended where Self: Sized + Copy {
     /// Converts any decimal unicode digit in `Nd` category
-    /// into `u32`. Returns `None` if no corresponding digit found.
-    fn to_decimal_utf8(&self) -> Option<u32>;
+    /// into `u8`. Returns `None` if no corresponding digit found.
+    fn to_decimal_utf8(&self) -> Option<u8>;
     /// Checks if digit belongs to the `Nd` category
     fn is_decimal_utf8(&self) -> bool {
         self.to_decimal_utf8().is_some()
     }
+
+    /// Returns representing '0'..='9' char for self
+    fn normalize_decimal(&self) -> Option<Self>;
 }
 
 impl DecimalExtended for char {
-    fn to_decimal_utf8(&self) -> Option<u32> {
+    fn to_decimal_utf8(&self) -> Option<u8> {
         return digit_parse_mappings!(self);
     }
+
+    fn normalize_decimal(&self) -> Option<Self> {
+        self
+            .to_decimal_utf8()
+            .map(| d | (d+b'0') as char)   
+    }
+}
+
+pub fn normalize_decimals_filtering(s: &str) -> String {
+    s.chars()
+        .filter_map(| c | c.normalize_decimal())
+        .collect()
+}
+
+pub fn normalize_decimals(s: &str) -> String {
+    s.chars()
+        .map(| c | c.normalize_decimal().unwrap_or(c))
+        .collect()
 }
 
 #[cfg(test)]
@@ -27,6 +48,14 @@ mod tests {
         assert_eq!('०'.to_decimal_utf8(), Some(0));
         assert_eq!('７'.to_decimal_utf8(), Some(7));
         assert_eq!('٣'.to_decimal_utf8(), Some(3));
+    }
+
+    #[test]
+    fn test_uncommon_digits_normalize() {
+        assert_eq!('९'.normalize_decimal(), Some('9'));
+        assert_eq!('०'.normalize_decimal(), Some('0'));
+        assert_eq!('７'.normalize_decimal(), Some('7'));
+        assert_eq!('٣'.normalize_decimal(), Some('3'));
     }
 
     #[test]
@@ -65,7 +94,9 @@ mod tests {
 
             line_number += 1;
             println!("line {}: {}", line_number, line);
-            assert_eq!(parsed.as_str(), "0023434098324892398099")
+            let expected_result = "0023434098324892398099";
+            assert_eq!(parsed.as_str(), expected_result);
+            assert_eq!(normalize_decimals(line), expected_result)
         });
 
     }

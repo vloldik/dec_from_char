@@ -33,7 +33,7 @@ fn benchmark_decimal_extended_string(c: &mut Criterion) {
             let _ = black_box(text)
                 .chars()
                 .filter_map(|c| c.to_decimal_utf8())
-                .collect::<Vec<u32>>();
+                .collect::<Vec<u8>>();
         })
     });
 }

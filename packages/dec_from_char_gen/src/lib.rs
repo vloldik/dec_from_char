@@ -103,7 +103,7 @@ pub fn digit_parse_mappings(item: TokenStream) -> TokenStream {
             let match_char = r.normalized_unicode_char;
             let ascii_digit = r.ascii_char;
             quote! {
-                #match_char => Some(#ascii_digit as u32)
+                #match_char => Some(#ascii_digit as u8)
             }
         })
         .collect::<Vec<_>>();
