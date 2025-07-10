@@ -1,6 +1,6 @@
 [package]
 name = "dec_from_char"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2024"
 license = "MIT OR Apache-2.0" 
 description = "Small library for converting unicode decimal into numbers"
@@ -12,7 +12,7 @@ repository = "https://github.com/vloldik/dec_from_char"
 documentation = "https://docs.rs/dec_from_char"
 
 [dependencies]
-dec_from_char_gen = { path = "../dec_from_char_gen", version = "0.1.0"}
+dec_from_char_gen = { path = "../dec_from_char_gen", version = "0.2.0"}
 
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
