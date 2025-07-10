@@ -1,3 +1,4 @@
+#[doc=include_str!("../../../Readme.md")]
 
 use dec_from_char_gen::{digit_parse_mappings};
 
@@ -101,7 +102,8 @@ mod tests {
             let expected_result = "0023434098324892398099";
             assert_eq!(parsed.as_str(), expected_result);
             assert_eq!(normalize_decimals_filtering(line), expected_result);
-            println!("{}", normalize_decimals(line))
+            println!("{}", normalize_decimals(line));
+            println!("{}", normalize_decimals("Phone number: （０）𝟗𝟖-𝟳𝟲𝟱 and pin: ٣-١-٤-١"))
         });
 
     }
